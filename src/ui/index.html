@@ -1,65 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Code Studio</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Code Studio</title>
 
-
-    <!-- css -->
-
-    <link type="text/css" href="./bootstrap/css/bootstrap.min.css">
+  <!-- css -->
+  <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap-overide.css">
+  <link rel="stylesheet" type="text/css" href="/css/index.css">
 </head>
+
 <body>
-    <div class="code-studio">
-        <div class="workspace">
-            <div class="d-flex flex-column flex-shrink-0 bg-light" style="width: 4.5rem;">
-                <a href="/" class="d-block p-3 link-dark text-decoration-none" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Icon-only">
-                  <svg class="bi pe-none" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
-                  <span class="visually-hidden">Icon-only</span>
-                </a>
-                <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
-                  <li class="nav-item">
-                    <a href="#" class="nav-link active py-3 border-bottom rounded-0" aria-current="page" data-bs-toggle="tooltip" data-bs-placement="right" aria-label="Home" data-bs-original-title="Home">
-                      <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Home"><use xlink:href="#home"></use></svg>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" class="nav-link py-3 border-bottom rounded-0" data-bs-toggle="tooltip" data-bs-placement="right" aria-label="Dashboard" data-bs-original-title="Dashboard">
-                      <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Dashboard"><use xlink:href="#speedometer2"></use></svg>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" class="nav-link py-3 border-bottom rounded-0" data-bs-toggle="tooltip" data-bs-placement="right" aria-label="Orders" data-bs-original-title="Orders">
-                      <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Orders"><use xlink:href="#table"></use></svg>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" class="nav-link py-3 border-bottom rounded-0" data-bs-toggle="tooltip" data-bs-placement="right" aria-label="Products" data-bs-original-title="Products">
-                      <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Products"><use xlink:href="#grid"></use></svg>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" class="nav-link py-3 border-bottom rounded-0" data-bs-toggle="tooltip" data-bs-placement="right" aria-label="Customers" data-bs-original-title="Customers">
-                      <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Customers"><use xlink:href="#people-circle"></use></svg>
-                    </a>
-                  </li>
-                </ul>
-                <div class="dropdown border-top">
-                  <a href="#" class="d-flex align-items-center justify-content-center p-3 link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="https://github.com/mdo.png" alt="mdo" class="rounded-circle" width="24" height="24">
-                  </a>
-                  <ul class="dropdown-menu text-small shadow">
-                    <li><a class="dropdown-item" href="#">New project...</a></li>
-                    <li><a class="dropdown-item" href="#">Settings</a></li>
-                    <li><a class="dropdown-item" href="#">Profile</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="#">Sign out</a></li>
-                  </ul>
-                </div>
-              </div>
-        </div>
+
+  <!-- Navbar Starts -->
+  <nav class="navbar bg-body-secondary bg-dark">
+    <div class="container">
+      <a class="navbar-brand mx-auto justify-content-center" href="#">
+        <img src="/assets/images/logo.png" alt="Bootstrap" width="30" height="30">
+      </a>
     </div>
+  </nav>
+  <!-- Navbar Ends -->
+
+
+
+  <div class="container-fluid editor-pc" style="height: 94vh;">
+    <div class="row h-100">
+      <div class="col-3 left-side">
+        <!-- Left column content goes here -->
+
+        <!-- tab-pane-starts -->
+        <div class="tab-pane">
+          <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+              <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home"
+                type="button" role="tab" aria-controls="nav-home" aria-selected="true">Problem</button>
+              <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile"
+                type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Settings</button>
+          </nav>
+
+          <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab"
+              tabindex="0">
+              <div class="ps">
+                <h3 class="mt-2">Problem Statement</h3>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+              <div class="settings">
+                <h3 class="mt-2">Settings</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- tab-pane-ends -->
+
+      </div>
+
+
+      <div class="col-9 right-side">
+        <!-- Right column content goes here -->
+        <div class="workspace bg-primary" style="height: 60%;" id="workspace-window">
+          <div id="editor"></div>
+        </div>
+
+        <div class="console bg-warning" style="height: 35%" id="terminal-window">
+          <div class="terminalx bg-dark" style="height: 100%;">
+            <h4 style="color: aliceblue;">My Terminal</h4>
+          </div>
+        </div>
+
+        <div class="bottom-toolbar bg-warning p-1" style="height:5%; border-top:1px solid black; width: 100%;">
+          <button class="toggleconsole" onclick="toggleTerminalVisibility()">Console</button>
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+
+
+
 </body>
+<script src="/js/ace-builds-master/src-noconflict/ace.js" type="application/javascript" charset=utf-8></script>
+<script src="/js/ace-builds-master/src-noconflict/ext-beautify.js"></script>
+<script src="/js/ace-builds-master/src-noconflict/ext-language_tools.js" type="application/javascript" charset=utf-8></script>
+<script src="/bootstrap/js/bootstrap.min.js"></script>
+<script src="/js/console.js"></script>
+
 </html>
