@@ -64,13 +64,37 @@
 
       <div class="col-9 right-side">
         <!-- Right column content goes here -->
-        <div class="workspace bg-primary" style="height: 60%;" id="workspace-window">
-          <div id="editor"></div>
+        <ul class="nav" style="height:5%">
+          <li class="nav-item">
+            <li class="nav-item dropstart language-selector">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  <span id="language">Select language</span>
+              </a>
+              <ul class="dropdown-menu">
+                  <li><button class="dropdown-item" onclick="selectLanguage(1)"><img class="technology-icn"
+                              src="https://img.icons8.com/color/48/null/java-coffee-cup-logo--v1.png" />
+                          Java</button></li>
+                  <li><button class="dropdown-item" onclick="selectLanguage(2)"><img class="technology-icn"
+                              src="https://img.icons8.com/color/48/null/python--v1.png" /> Python</button>
+                  </li>
+                  <li><button class="dropdown-item" onclick="selectLanguage(3)"><img class="technology-icn"
+                              src="https://img.icons8.com/fluency/48/null/node-js.png" /> Node</button></li>
+              </ul>
+          </li>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+        </ul>
+
+        <div class="workspace bg-primary" style="height: 55%;" id="workspace-window">
+          <div id="editor" style="height: 100%;"></div>
         </div>
 
         <div class="console bg-warning" style="height: 35%" id="terminal-window">
           <div class="terminalx bg-dark" style="height: 100%;">
-            <h4 style="color: aliceblue;">My Terminal</h4>
+            <h6 class="p-3" style="color: aliceblue;">My Terminal</h6>
           </div>
         </div>
 
@@ -87,10 +111,13 @@
 
 
 </body>
-<script src="/js/ace-builds-master/src-noconflict/ace.js" type="application/javascript" charset=utf-8></script>
-<script src="/js/ace-builds-master/src-noconflict/ext-beautify.js"></script>
-<script src="/js/ace-builds-master/src-noconflict/ext-language_tools.js" type="application/javascript" charset=utf-8></script>
+<!-- <script src="/js/ace-builds-master/src-noconflict/ace.js" type="application/javascript" charset=utf-8></script> -->
+<script src="/ace/ace.js"></script>
+
+<!-- <script src="/js/ace-builds-master/src-noconflict/ext-beautify.js"></script>
+<script src="/js/ace-builds-master/src-noconflict/ext-language_tools.js" type="application/javascript" charset=utf-8></script> -->
 <script src="/bootstrap/js/bootstrap.min.js"></script>
+<script src="/js/editor.js"></script>
 <script src="/js/console.js"></script>
 
 </html>
