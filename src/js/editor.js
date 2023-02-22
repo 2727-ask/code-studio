@@ -6,10 +6,10 @@ const languageMap = {
 }
 
 const technologyIcnMap = {
-    0: '<img class="technology-icn" src="https://img.icons8.com/color/48/null/c-plus-plus-logo.png" alt="C++"/>',
-    1: '<img class="technology-icn" src="https://img.icons8.com/color/48/null/java-coffee-cup-logo--v1.png" alt="Java"/>',
-    2: '<img class="technology-icn" src="https://img.icons8.com/color/48/null/python--v1.png" alt="Python"/>',
-    3: '<img class="technology-icn" src="https://img.icons8.com/fluency/48/null/node-js.png" alt="Node.js"/>'
+    0: 'C++',
+    1: 'Java',
+    2: 'Python',
+    3: 'Node.js'
 }
 
 var editor = ace.edit("editor", {
@@ -18,16 +18,27 @@ var editor = ace.edit("editor", {
     enableLiveAutocompletion: true
 });
 
+let editorMobile = ace.edit("editor-mobile", {
+    enableBasicAutocompletion: true,
+    enableSnippets: true,
+    enableLiveAutocompletion: true 
+});
+
 
 editor.setOptions({
     formatOnType: true,
 });
 
+editorMobile.setOptions({
+    formatOnType: true,
+})
 
 function selectLanguage(params) {
     var language = document.getElementById("language");
+    var languageMobile = document.getElementById("language-mobile");
     language.innerHTML = technologyIcnMap[params];
+    languageMobile.innerHTML = technologyIcnMap[params];
     currentLanguage = params
     editor.session.setMode(`ace/mode/${languageMap[params]}`);
-    editor.session.setValue(scriptMap[params]);
+    editorMobile.session.setMode(`ace/mode/${languageMap[params]}`);
 }

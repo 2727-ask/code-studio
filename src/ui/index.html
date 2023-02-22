@@ -11,10 +11,11 @@
   <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="/css/bootstrap-overide.css">
   <link rel="stylesheet" type="text/css" href="/css/index.css">
+  <link rel="stylesheet" type="text/css" href="/css/terminal.css">
+
 </head>
 
 <body>
-
   <!-- Navbar Starts -->
   <nav class="navbar bg-body-secondary bg-dark">
     <div class="container">
@@ -26,9 +27,9 @@
   <!-- Navbar Ends -->
 
 
-
-  <div class="container-fluid editor-pc" style="height: 94vh;">
-    <div class="row h-100">
+  <!-- Editor-desktop Starts -->
+  <div class="container-fluid editor-pc" style="height: 100%;">
+    <div class="row" style="height: 100%;">
       <div class="col-3 left-side">
         <!-- Left column content goes here -->
 
@@ -64,60 +65,148 @@
 
       <div class="col-9 right-side">
         <!-- Right column content goes here -->
-        <ul class="nav" style="height:5%">
-          <li class="nav-item">
-            <li class="nav-item dropstart language-selector">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                  aria-expanded="false">
-                  <span id="language">Select language</span>
-              </a>
-              <ul class="dropdown-menu">
-                  <li><button class="dropdown-item" onclick="selectLanguage(1)"><img class="technology-icn"
-                              src="https://img.icons8.com/color/48/null/java-coffee-cup-logo--v1.png" />
-                          Java</button></li>
-                  <li><button class="dropdown-item" onclick="selectLanguage(2)"><img class="technology-icn"
-                              src="https://img.icons8.com/color/48/null/python--v1.png" /> Python</button>
-                  </li>
-                  <li><button class="dropdown-item" onclick="selectLanguage(3)"><img class="technology-icn"
-                              src="https://img.icons8.com/fluency/48/null/node-js.png" /> Node</button></li>
-              </ul>
+        <ul class="nav" style="
+        height:5%;
+        max-height: 5%;">
+          <li class="nav-item" style="height:90%; padding: 1px !important;">
+          <li class="nav-item dropstart language-selector">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <span id="language-mobile">Select language</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><button class="dropdown-item" onclick="selectLanguage(1)"><img class="technology-icn"
+                    src="https://img.icons8.com/color/48/null/java-coffee-cup-logo--v1.png" />
+                  Java</button></li>
+              <li><button class="dropdown-item" onclick="selectLanguage(2)"><img class="technology-icn"
+                    src="https://img.icons8.com/color/48/null/python--v1.png" /> Python</button>
+              </li>
+              <li><button class="dropdown-item" onclick="selectLanguage(3)"><img class="technology-icn"
+                    src="https://img.icons8.com/fluency/48/null/node-js.png" /> Node</button></li>
+            </ul>
           </li>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
+            <a class="nav-link" href="#">Run</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Save</a>
           </li>
         </ul>
 
-        <div class="workspace bg-primary" style="height: 55%;" id="workspace-window">
-          <div id="editor" style="height: 100%;"></div>
+        <div class="workspace bg-primary" style="height:55% !important" id="workspace-window">
+          <div id="editor" style="height:100% !important"></div>
         </div>
 
-        <div class="console bg-warning" style="height: 35%" id="terminal-window">
+        <div class="console bg-success" style="height: 35%" id="terminal-window">
           <div class="terminalx bg-dark" style="height: 100%;">
-            <h6 class="p-3" style="color: aliceblue;">My Terminal</h6>
+            <div id="terminal"></div>
           </div>
         </div>
 
         <div class="bottom-toolbar bg-warning p-1" style="height:5%; border-top:1px solid black; width: 100%;">
-          <button class="toggleconsole" style="font-size: 14px;" onclick="toggleTerminalVisibility()">Console</button>
+          <ul class="nav" style="height:100%; max-height: 100%;">
+            <li class="nav-item" style="height:90%; padding: 1px !important;">
+              <button class="toggleconsole" onclick="toggleTerminalVisibility()">Console</button>
+            </li>
+          </ul>
         </div>
+
+        
       </div>
 
 
 
     </div>
   </div>
+  <!-- Editor Desktop Ends -->
+
+
+  <!-- Editor Mobile Starts -->
+
+  <div class="container-fluid editor-mobile w-100">
+    <div class="d-flex justify-content-center">
+      <div class="container">
+        <ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
+          <li class="nav-item navitem" role="presentation">
+            <button class="nav-link active" id="desc-tab" data-bs-toggle="tab" data-bs-target="#desc" type="button"
+              role="tab" aria-controls="desc" aria-selected="true">Description</button>
+          </li>
+          <li class="nav-item navitem" role="presentation">
+            <button class="nav-link" id="editor-tab" data-bs-toggle="tab" data-bs-target="#codeeditor" type="button"
+              role="tab" aria-controls="editor" aria-selected="false">Editor</button>
+          </li>
+          <li class="nav-item navitem" role="presentation">
+            <button class="nav-link" id="shell-tab" data-bs-toggle="tab" data-bs-target="#myshell" type="button"
+              role="tab" aria-controls="shell" aria-selected="false">Shell</button>
+          </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade show active" id="desc" role="tabpanel" aria-labelledby="desc-tab">
+            <p>Description</p>
+          </div>
+          <div class="tab-pane fade" id="codeeditor" role="tabpanel" aria-labelledby="editor-tab">
+            <ul class="nav bg-secondary" style="height:40px;max-height: 40px;">
+              <li class="nav-item" style="height:90%; padding: 1px !important;">
+              <li class="nav-item dropstart language-selector">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  <span id="language">Select language</span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><button class="dropdown-item" onclick="selectLanguage(1)"><img class="technology-icn"
+                        src="https://img.icons8.com/color/48/null/java-coffee-cup-logo--v1.png" />
+                      Java</button></li>
+                  <li><button class="dropdown-item" onclick="selectLanguage(2)"><img class="technology-icn"
+                        src="https://img.icons8.com/color/48/null/python--v1.png" /> Python</button>
+                  </li>
+                  <li><button class="dropdown-item" onclick="selectLanguage(3)"><img class="technology-icn"
+                        src="https://img.icons8.com/fluency/48/null/node-js.png" /> Node</button></li>
+                </ul>
+              </li>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Run</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Save</a>
+              </li>
+            </ul>
+            <div class="workspace" style="height: 90vh !important">
+              <div id="editor-mobile" style="height: 100%;">
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="myshell" role="tabpanel" aria-labelledby="shell-tab">
+            <p>Shell</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+  <!-- Editor Mobile Ends -->
 
 
 
 </body>
 <!-- <script src="/js/ace-builds-master/src-noconflict/ace.js" type="application/javascript" charset=utf-8></script> -->
-<script src="/ace/ace.js"></script>
+
+<script src="/ace/ace.js" type="application/javascript"></script>
+<script src="/ace/ext-language_tools.js" type="application/javascript"></script>
+<script src="js/terminal.js" type="application/javascript"></script>
+<script src="/js/console.js" type="application/javascript"></script>
+<script src="/js/editor.js" type="application/javascript"></script>
+<script src="/js/socket.min.js" type="application/javascript"></script>
+<script src="/js/socket-console-consumer.js" type="application/javascript"></script>
+
+
 
 <!-- <script src="/js/ace-builds-master/src-noconflict/ext-beautify.js"></script>
 <script src="/js/ace-builds-master/src-noconflict/ext-language_tools.js" type="application/javascript" charset=utf-8></script> -->
 <script src="/bootstrap/js/bootstrap.min.js"></script>
-<script src="/js/editor.js"></script>
-<script src="/js/console.js"></script>
+<script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+
 
 </html>
