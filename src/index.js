@@ -88,6 +88,7 @@ const path = require('path');
 
 
 const dependancy = require('./inject/dependancy');
+const { runPython } = require("./runner/runner");
 dependancy(app);
 
 
@@ -136,10 +137,10 @@ io.on("connection", (socket) => {
     socket.on("code", (data) => {
         ptyProcess.write("clear")
         ptyProcess.write("\n");
-
+        runPython(data.code, ptyProcess);
         //Run Python
         if(data.type == "python"){
-            runner.runPython(data.code, ptyProcess);
+            
         }else if(data.type == "java"){
             runner.runJava(data.code, ptyProcess);
         }else if(data.type=="javascript"){

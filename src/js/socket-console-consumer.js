@@ -5,6 +5,13 @@ var term = new Terminal({
     fontSize: 10
 });
 
+var term2 = new Terminal({
+    cursorBlink: "block",
+    rows: 10,
+    cols: 10,
+    fontSize: 10
+});
+
 // term.terminalOptions = {
 
 //     cursorBlink: true,
@@ -23,7 +30,9 @@ var curr_line = "";
 var entries = [];
 
 var documentTerminal = document.getElementById('terminal');
+var documentTerminalMobile = document.getElementById('terminalMobile');
 term.open(documentTerminal);
+term2.open(documentTerminalMobile);
 
 //-------------------Write Data To Terminal-------------------------------//
 
@@ -42,6 +51,7 @@ socket.on('output', function (data) {
     console.log(data);
     if(printLn){
         term.write(data);
+        term2.write(data);
     }
     printLn = true;
 });
@@ -52,22 +62,48 @@ term.onKey((key) => {
     if (key.key === "\r") {
         if (curr_line != "") {
             term.write("\n\r");
+            term2.write("\n\r");
             socket.emit("input", curr_line);
         }
     } else if (key.key === "\u007f") {
         if (curr_line) {
             curr_line = curr_line.slice(0, curr_line.length - 1);
             term.write("\b \b");
+            term2.write("\b \b");
         }
     } else {
         console.log("Else");
         curr_line += key.key;
         term.write(key.key);
+        term2.write(key.key);
     }
     console.log("This is curr line "+curr_line);
 })
 
 //-----------Code Runner ------------------
+
+term2.onKey((key) => {
+    console.log(key)
+    if (key.key === "\r") {
+        if (curr_line != "") {
+            term.write("\n\r");
+            term2.write("\n\r");
+            socket.emit("input", curr_line);
+        }
+    } else if (key.key === "\u007f") {
+        if (curr_line) {
+            curr_line = curr_line.slice(0, curr_line.length - 1);
+            term.write("\b \b");
+            term2.write("\b \b");
+        }
+    } else {
+        console.log("Else");
+        curr_line += key.key;
+        term.write(key.key);
+        term2.write(key.key);
+    }
+    console.log("This is curr line "+curr_line);
+})
 
 
 
@@ -92,22 +128,22 @@ function terminalSizeAdjust(width) {
     if (initWidth < 400) {
         initFontSize = 11;
         intCols = 40;
-        intRows = 14        
+        intRows = 40        
     }
     else if (initWidth > 400 && initWidth < 500) {
         initFontSize = 11;
         intCols = 54;
-        intRows = 12;
+        intRows = 40;
     }
     else if (initWidth > 500 && initWidth < 600) {
         initFontSize = 11;
         intCols = 63;
-        intRows = 12;
+        intRows = 40;
     }
     else if (initWidth > 600 && initWidth < 700) {
         initFontSize = 11;
         intCols = 65;
-        intRows = 12;
+        intRows = 40;
 
     }
     else if (initWidth > 700 && initWidth < 800) {
@@ -127,7 +163,9 @@ function terminalSizeAdjust(width) {
     }
 
     term._publicOptions.fontSize = initFontSize;
+    term2._publicOptions.fontSize = initFontSize;
     term.resize(intCols, intRows)
+    term2.resize(intCols, intRows)
     // console.log(term._publicOptions.set("cols"));
     // term._publicOptions.rows = rows;
 

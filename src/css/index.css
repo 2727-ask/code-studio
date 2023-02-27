@@ -1,20 +1,28 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
 
-html,body{
+.mypage {
+    display: flex;
+    flex-direction: column;
     height: 100vh;
 }
 
-.left-side{
-    height:100% !important;
+.left-side {
+    height: 100% !important;
     border-right: 1px solid black;
 }
 
 
 
-.bottom-toolbar{
+.bottom-toolbar {
     margin-top: auto;
 }
 
-.technology-icn{
+.technology-icn {
     width: 30px;
     height: 30px;
 }
@@ -24,12 +32,13 @@ html,body{
 
 /* CSS for mobile devices */
 @media only screen and (max-width: 767px) {
+
     /* Add your CSS code for mobile devices here */
-    .editor-pc{
+    .editor-pc {
         display: none;
     }
 
-    .editor-mobile{
+    .editor-mobile {
         display: block;
     }
 
@@ -40,11 +49,11 @@ html,body{
 @media only screen and (min-width: 768px) {
     /* Add your CSS code for larger devices here */
 
-    .editor-pc{
+    .editor-pc {
         display: block;
     }
 
-    .editor-mobile{
+    .editor-mobile {
         display: none;
     }
 }

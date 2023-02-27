@@ -12,6 +12,8 @@ const technologyIcnMap = {
     3: 'Node.js'
 }
 
+let currentLanguage = "";
+
 var editor = ace.edit("editor", {
     enableBasicAutocompletion: true,
     enableSnippets: true,
@@ -41,4 +43,15 @@ function selectLanguage(params) {
     currentLanguage = params
     editor.session.setMode(`ace/mode/${languageMap[params]}`);
     editorMobile.session.setMode(`ace/mode/${languageMap[params]}`);
+
+    currentLanguage = languageMap[params];
+}
+
+
+function runCode() {
+    var code = editor.getValue();
+    socket.emit("code", {
+        type: languageMap[currentLanguage],
+        code: code
+    })
 }
