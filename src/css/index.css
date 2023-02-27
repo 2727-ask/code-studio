@@ -5,6 +5,36 @@ body {
     padding: 0;
 }
 
+
+/* Hide Scroll bars */
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.slide-up {
+    animation-name: slide-up;
+    animation-duration: 0.2s;
+  }
+  
+  @keyframes slide-up {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+
+
+
+
 .mypage {
     display: flex;
     flex-direction: column;
