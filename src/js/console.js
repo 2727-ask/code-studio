@@ -3,9 +3,9 @@ function toggleTerminalVisibility() {
     var workspaceWindow = document.getElementById("workspace-window");
     if (terminalWindow.style.display === "none") {
         terminalWindow.style.display = "block";
-        workspaceWindow.style.height = "55%";
+        workspaceWindow.style.height = "60%";
     } else {
         terminalWindow.style.display = "none";
-        workspaceWindow.style.height = "90%";
+        workspaceWindow.style.height = "100%";
     }
 }
