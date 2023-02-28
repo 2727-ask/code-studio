@@ -28,7 +28,7 @@
 
   <div class="editor-pc">
     <div class="row mx-0">
-      <div class="col-3 no-scrollbar" style="height: 88vh; overflow: scroll;">
+      <div class="col-3 no-scrollbar" id="my-side-bar" style="height: 88vh; overflow: scroll;">
         <div class="tab-pane">
           <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -53,7 +53,7 @@
                     <h5 class="card-title">Configure Editor</h5>
                     <h6 class="card-subtitle mb-2 text-muted">Manage sizes, colors</h6>
                     <label for="fontsizerange" class="form-label">font size &nbsp;<span id="fontSizeValue"
-                        class="text-primary"></span></label>
+                        class=""></span></label>
                     <input type="range" class="form-range" min="10" max="50" id="fontsizerange"
                       oninput="changeFontSize(this)">
                   </div>
@@ -78,20 +78,20 @@
         </div>
       </div>
       <div class="col-9 bg-dark">
-        <ul class="nav bg-warning w-100">
+        <ul class="nav w-100" id="upper-toolbar">
           <li class="nav-item">
           <li class="nav-item dropstart language-selector">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <span id="language-mobile">Select language</span>
+              <span id="language">Select language</span>
             </a>
             <ul class="dropdown-menu">
-              <li><button class="dropdown-item" onclick="selectLanguage(1)"><img class="technology-icn"
+              <li><button class="dropdown-item" onclick="selectLanguage(0)"><img class="technology-icn"
                     src="https://img.icons8.com/color/48/null/java-coffee-cup-logo--v1.png" />
                   Java</button></li>
-              <li><button class="dropdown-item" onclick="selectLanguage(2)"><img class="technology-icn"
+              <li><button class="dropdown-item" onclick="selectLanguage(1)"><img class="technology-icn"
                     src="https://img.icons8.com/color/48/null/python--v1.png" /> Python</button>
               </li>
-              <li><button class="dropdown-item" onclick="selectLanguage(3)"><img class="technology-icn"
+              <li><button class="dropdown-item" onclick="selectLanguage(2)"><img class="technology-icn"
                     src="https://img.icons8.com/fluency/48/null/node-js.png" /> Node</button></li>
             </ul>
           </li>
@@ -115,7 +115,7 @@
     <div class="d-flex justify-content-end bg-dark w-100">
       <button class="btn btn-secondary btn-sm" onclick="toggleTerminalVisibility()">Console</button>
       <span style="width: 5px;"></span>
-      <button class="btn btn-primary btn-sm">Run</button>
+      <button class="btn btn-primary btn-sm" onclick="runCode()">Run</button>
       <span style="width: 5px;"></span>
       <button class="btn btn-sm btn-success">Submit</button>
       <span style="width: 5px;"></span>

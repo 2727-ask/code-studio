@@ -87,7 +87,6 @@ term.onKey((key) => {
     console.log("This is curr line " + curr_line);
 })
 
-//-----------Code Runner ------------------
 
 term2.onKey((key) => {
     console.log(key)
@@ -218,6 +217,12 @@ window.addEventListener("resize", function () {
 //       term.write(term.history.getNext());
 //     }
 //   });
+
+
+//-----------Code Runner ------------------
+
+
+
 
 
 
