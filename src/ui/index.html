@@ -32,11 +32,10 @@
         <div class="tab-pane">
           <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
-              <button class="nav-link" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button"
-                role="tab" aria-controls="nav-home" aria-selected="true">Problem</button>
+              <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home"
+                type="button" role="tab" aria-controls="nav-home" aria-selected="true">Problem</button>
               <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile"
                 type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Settings</button>
-            </div>
           </nav>
 
           <div class="tab-content" id="nav-tabContent">
@@ -49,12 +48,36 @@
             <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
               <div class="settings">
                 <h3 class="mt-2">Settings</h3>
+                <div class="card setting-card">
+                  <div class="card-body">
+                    <h5 class="card-title">Configure Editor</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Manage sizes, colors</h6>
+                    <label for="fontsizerange" class="form-label">font size &nbsp;<span id="fontSizeValue"
+                        class="text-primary"></span></label>
+                    <input type="range" class="form-range" min="10" max="50" id="fontsizerange"
+                      oninput="changeFontSize(this)">
+                  </div>
+                </div>
+
+                <div class="card setting-card my-2">
+                  <div class="card-body">
+                    <h5 class="card-title">Themes</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">personalize your editor</h6>
+                    <div class="text-center">
+                      <button class="btn mx-1 my-1 monokai-btn" onclick="changeTheme(0)">Monokai</button>
+                      <button class="btn mx-1 my-1 dracula-btn" onclick="changeTheme(1)">Dracula</button>
+                      <button class="btn mx-1 my-1 twilight-btn" onclick="changeTheme(2)">Twilight</button>
+                      <button class="btn mx-1 my-1 solarized-dark-btn" onclick="changeTheme(3)">Solarized Dark</button>
+                      <button class="btn mx-1 my-1 solarized-light-btn" onclick="changeTheme(4)">Solarized Light</button>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-9 bg-primary">
+      <div class="col-9 bg-dark">
         <ul class="nav bg-warning w-100">
           <li class="nav-item">
           <li class="nav-item dropstart language-selector">
