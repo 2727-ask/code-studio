@@ -11,7 +11,23 @@
     padding-bottom: 0.25rem;
 }
 
-.active{
+.active {
     background-color: transparent !important;
     border: none !important;
+}
+
+.nav-link.active {
+    color: white !important;
+    background-color: var(--bs-border-color-translucent);
+    border-color: var(--bs-nav-tabs-link-active-border-color);
+}
+
+.nav-link {
+	display: block;
+	padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x);
+	font-size: var(--bs-nav-link-font-size);
+	font-weight: var(--bs-nav-link-font-weight);
+	text-decoration: none;
+	transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
+	color: #c9d1d9 !important;
 }

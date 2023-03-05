@@ -71,9 +71,11 @@ body {
 @media only screen and (max-width: 767px) {
 
     /* Add your CSS code for mobile devices here */
-    .editor-pc {
+    .editor-pc, .editor-pc-footer {
         display: none;
     }
+
+    
 
     .editor-mobile {
         display: block;
@@ -86,7 +88,7 @@ body {
 @media only screen and (min-width: 768px) {
     /* Add your CSS code for larger devices here */
 
-    .editor-pc {
+    .editor-pc, .editor-pc-footer{
         display: block;
     }
 
