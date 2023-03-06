@@ -1,6 +1,8 @@
-let consoleHistory = [];
 
-let currentIndex = 0;
+
+// Define an array to store command history
+let commandHistory = [];
+
 
 var term = new Terminal({
     cursorBlink: "block",
@@ -16,6 +18,8 @@ var term2 = new Terminal({
     cols: 10,
     fontSize: 10,
 });
+
+
 
 // term.terminalOptions = {
 
@@ -37,6 +41,8 @@ var entries = [];
 var documentTerminal = document.getElementById('terminal');
 var documentTerminalMobile = document.getElementById('terminalMobile');
 term.open(documentTerminal);
+
+// const localEcho = new LocalEchoController(term);
 // term2.open(documentTerminalMobile);
 
 //-------------------Write Data To Terminal-------------------------------//
@@ -69,7 +75,7 @@ term.onKey((key) => {
             term.write("\n\r");
             term2.write("\n\r");
             socket.emit("input", curr_line);
-            consoleHistory.push(curr_line);
+            commandHistory.push(curr_line);
         }
     } else if (key.key === "\u007f") {
         if (curr_line) {
@@ -94,7 +100,6 @@ term2.onKey((key) => {
         if (curr_line != "") {
             term.write("\n\r");
             term2.write("\n\r");
-            consoleHistory.push(curr_line);
             socket.emit("input", curr_line);
         }
     } else if (key.key === "\u007f") {
@@ -219,7 +224,13 @@ window.addEventListener("resize", function () {
 //   });
 
 
-//-----------Code Runner ------------------
+//-----------Terminal History ------------------
+
+
+// Define the current index of the command history array
+let commandIndex = -1;
+
+
 
 
 
