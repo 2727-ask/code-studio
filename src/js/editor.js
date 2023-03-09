@@ -120,6 +120,7 @@ changeTheme();
 function removeClassAndAddTheme(themeId) {
     let toolbar = document.getElementById("upper-toolbar");
     let sidebar = document.getElementById("my-side-bar");
+    let ps = document.getElementById("ps");
 
 
     sidebar.classList.forEach(function (className) { // Loop through all class names
