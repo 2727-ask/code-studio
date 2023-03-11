@@ -29,6 +29,7 @@ const themeBtnMap = {
 
 
 let currentLanguage = 0;
+let currentLanguageCode = 0;
 
 var editor = ace.edit("editor", {
     enableBasicAutocompletion: true,
@@ -56,7 +57,8 @@ function selectLanguage(params) {
     // var languageMobile = document.getElementById("language-mobile");
     language.innerHTML = technologyIcnMap[params];
     // languageMobile.innerHTML = technologyIcnMap[params];
-    currentLanguage = params
+    currentLanguage = params;
+    currentLanguageCode = params;
     editor.session.setMode(`ace/mode/${languageMap[params]}`);
     // editorMobile.session.setMode(`ace/mode/${languageMap[params]}`);
     currentLanguage = languageMap[params];
@@ -139,4 +141,32 @@ function removeClassAndAddTheme(themeId) {
     sidebar.classList.add(themeBtnMap[themeId]);
 }
 
+
+function beautifyCode() {
+    const beautify = js_beautify(editor.getValue());
+    editor.setValue(beautify);
+}
+
+
+function downloadCode() {
+    let content = editor.getValue();
+    let extension = ".txt"
+    if (currentLanguageCode === 0) {
+        extension = ".java";
+    } else if (currentLanguageCode === 1) {
+        extension = ".py"
+    } else if (currentLanguageCode === 2) {
+        extension = ".js"
+    } else {
+        extension = ".txt"
+    }
+    console.log(extension);
+    let blob = new Blob([content], { type: "text/plain;charset=utf-8" });
+    let name = prompt("Save file as");
+    if (name != null && name != "") {
+        saveAs(blob, name + extension);
+    } else {
+        alert("You did not enter a name.");
+    }
+}
 

@@ -1,0 +1,8 @@
+version: '3.9'
+
+services:
+  api:
+    container_name: codestudior10l
+    build: .
+    ports:
+      - 2727:2727
