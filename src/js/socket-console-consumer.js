@@ -33,7 +33,7 @@ var term2 = new Terminal({
 //Uncomment on Deployment
 // const socket = io("http://154.26.154.29"); 
 
-const socket = io();
+const socket = io({transports:['websocket']});
 console.log(socket);
 var curr_line = "";
 var entries = [];

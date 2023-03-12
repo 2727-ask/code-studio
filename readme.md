@@ -104,3 +104,17 @@ app.listen(3000, () => console.log('Server listening on port 3000.'));
 docker build -t shivajimaharaj .
 
 docker run -p 8000:3000 shivajimaharaj
+
+
+
+
+
+
+I found the solution :)) 1- I run one container, 2- while the first socket connection continue, I run second container. And then I saw the socket keep reconnecting.( socketdID connected, socketID disconnected, and then go on ... )
+
+and solution is, on client side, make the socket, disable long polling with transports config.
+
+this.socket=io("http://localhost:9999",{ transports:['websocket']
+
+
+https://stackoverflow.com/questions/73096997/scale-node-js-docker-haproy-socket-io-vue
