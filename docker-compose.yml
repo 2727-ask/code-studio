@@ -14,8 +14,6 @@ services:
       - "3002:2727"
     networks:
       - app-network
-
-
   
   nginx:
     image: nginx

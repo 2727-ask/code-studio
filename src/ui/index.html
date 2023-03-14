@@ -18,10 +18,32 @@
 <body>
   <!-- Navbar Starts -->
   <nav class="navbar bg-body-secondary bg-dark">
-    <div class="container">
+    <div class="container-fluid">
       <a class="navbar-brand mx-auto justify-content-center" href="#">
         <img src="/assets/images/logo.png" alt="Bootstrap" width="30" height="30">
       </a>
+
+      <div class="d-flex">
+        <!-- <div class="btn-group dropstart">
+          <a class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            Auth
+          </a>
+          <ul class="dropdown-menu">
+          </ul>
+        </div> -->
+
+        <div class="dropstart" id="profile_pic">
+          <button class="btn btn-dark dropdown-toggle" onclick="setUserInfo()" type="button" id="dropdownMenu2"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="https://s3-us-west-1.amazonaws.com/s3-lc-upload/assets/default_avatar.jpg" width="30" height="30"
+              alt="" srcset="">
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            <li class="dropdown-item" id="username"></li>
+            <li class="dropdown-item" id="email"></li>
+          </ul>
+        </div>
+      </div>
     </div>
   </nav>
   <!-- Navbar Ends -->
@@ -83,8 +105,8 @@
                     <h5 class="card-title">Shortcuts</h5>
                     <h6 class="card-subtitle mb-2 text-muted">Shortcuts & Key-bindings</h6>
 
-                    <a class="btn twilight-btn" data-bs-toggle="modal" href="#exampleModalToggle"
-                      role="button">Open Shortcuts</a>
+                    <a class="btn twilight-btn" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Open
+                      Shortcuts</a>
 
                   </div>
                 </div>
@@ -134,6 +156,29 @@
         </div>
       </div>
     </div>
+  </div>
+
+
+
+
+  <div class="editor-mobile">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Profile</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Contact</button>
+      </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">...</div>
+      <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
+      <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+    </div>
+    
   </div>
 
 

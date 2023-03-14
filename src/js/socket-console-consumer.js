@@ -42,6 +42,10 @@ var documentTerminal = document.getElementById('terminal');
 var documentTerminalMobile = document.getElementById('terminalMobile');
 term.open(documentTerminal);
 
+
+
+ 
+
 // const localEcho = new LocalEchoController(term);
 // term2.open(documentTerminalMobile);
 

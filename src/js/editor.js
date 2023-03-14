@@ -52,6 +52,22 @@ editor.setOptions({
 //     formatOnType: true,
 // })
 
+function getPreviouslyDoneCode() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const assignmentId = urlParams.get('assignmentId');
+
+    if (assignmentId != null) {
+        let prevCode = localStorage.getItem(assignmentId);
+        if (prevCode != null && prevCode != undefined) {
+            editor.setValue(prevCode)
+        }
+    }
+}
+
+getPreviouslyDoneCode();
+
+
+
 function selectLanguage(params) {
     var language = document.getElementById("language");
     // var languageMobile = document.getElementById("language-mobile");
@@ -169,4 +185,41 @@ function downloadCode() {
         alert("You did not enter a name.");
     }
 }
+
+
+
+
+
+//Save Code
+editor.getSession().on("change", function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    const assignmentId = urlParams.get('assignmentId');
+
+    
+
+
+    if (assignmentId != null) {
+        console.log("triggered save");
+        var code = editor.getValue();
+        try {
+            localStorage.setItem(assignmentId, code);
+        } catch (e) {
+            if (e.code === DOMException.QUOTA_EXCEEDED_ERR && localStorage.length === 0) {
+                // localStorage is completely full, notify the user
+                if (window.confirm('Your LocalStorage is full. Do you want to clear cache')) {
+                    // User clicked "OK", continue with script
+                    localStorage.clear()
+                    alert("Local Storage Cleared Successfully")
+                  } else {
+                    // User clicked "Cancel", terminate script
+                    return;
+                  }
+            } else {
+                // some other error occurred, handle it accordingly
+                console.error('Error occurred while accessing localStorage:', e);
+            }
+        }
+    }
+});
+
 
