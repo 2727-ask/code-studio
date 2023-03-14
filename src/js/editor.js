@@ -37,20 +37,22 @@ var editor = ace.edit("editor", {
     enableLiveAutocompletion: true
 });
 
-// let editorMobile = ace.edit("editor-mobile", {
-//     enableBasicAutocompletion: true,
-//     enableSnippets: true,
-//     enableLiveAutocompletion: true 
-// });
+
+
+let editorMobile = ace.edit("myEditor", {
+    enableBasicAutocompletion: true,
+    enableSnippets: true,
+    enableLiveAutocompletion: true
+});
 
 
 editor.setOptions({
     formatOnType: true,
 });
 
-// editorMobile.setOptions({
-//     formatOnType: true,
-// })
+editorMobile.setOptions({
+    formatOnType: true,
+})
 
 function getPreviouslyDoneCode() {
     const urlParams = new URLSearchParams(window.location.search);
@@ -59,7 +61,9 @@ function getPreviouslyDoneCode() {
     if (assignmentId != null) {
         let prevCode = localStorage.getItem(assignmentId);
         if (prevCode != null && prevCode != undefined) {
-            editor.setValue(prevCode)
+            editor.setValue(prevCode);
+            editorMobile.setValue(prevCode);
+
         }
     }
 }
@@ -76,6 +80,7 @@ function selectLanguage(params) {
     currentLanguage = params;
     currentLanguageCode = params;
     editor.session.setMode(`ace/mode/${languageMap[params]}`);
+    editorMobile.session.setMode(`ace/mode/${languageMap[params]}`);
     // editorMobile.session.setMode(`ace/mode/${languageMap[params]}`);
     currentLanguage = languageMap[params];
 }
@@ -100,21 +105,23 @@ function changeFontSize(value) {
         console.log("if triggered");
         currentFontSize = fontSize + "px";
         editor.setOption("fontSize", currentFontSize);
+        editorMobile.setOption("fontSize", currentFontSize);
         document.getElementById("fontSizeValue").innerText = `${currentFontSize}`;
+        document.getElementById("fontSizeValueMobile").innerText = `${currentFontSize}`;
     } else {
         console.log("else triggered");
-
         localStorage.setItem("fontSize", 15);
         currentFontSize = 15 + "px";
         editor.setOption("fontSize", currentFontSize);
+        editorMobile.setOption("fontSize", currentFontSize);
         document.getElementById("fontSizeValue").innerText = '15px';
+        document.getElementById("fontSizeValueMobile").innerText = '15px';
     }
 }
 
 changeFontSize()
 
 function changeTheme(params) {
-
     if (params != null && params != undefined) {
         localStorage.setItem('theme', params);
         editor.setTheme(`ace/theme/${themeMap[params]}`);
@@ -160,7 +167,13 @@ function removeClassAndAddTheme(themeId) {
 
 function beautifyCode() {
     const beautify = js_beautify(editor.getValue());
-    editor.setValue(beautify);
+    const editorMobileCode = js_beautify(editorMobile.getValue());
+    if(editorMobileCode!=null && editorMobileCode!=undefined && editorMobileCode!=""){
+        editorMobile.setValue(beautify);
+    }else{
+        editor.setValue(beautify);
+    }
+   
 }
 
 
@@ -195,31 +208,39 @@ editor.getSession().on("change", function () {
     const urlParams = new URLSearchParams(window.location.search);
     const assignmentId = urlParams.get('assignmentId');
 
-    
-
-
     if (assignmentId != null) {
         console.log("triggered save");
         var code = editor.getValue();
-        try {
-            localStorage.setItem(assignmentId, code);
-        } catch (e) {
-            if (e.code === DOMException.QUOTA_EXCEEDED_ERR && localStorage.length === 0) {
-                // localStorage is completely full, notify the user
-                if (window.confirm('Your LocalStorage is full. Do you want to clear cache')) {
-                    // User clicked "OK", continue with script
-                    localStorage.clear()
-                    alert("Local Storage Cleared Successfully")
-                  } else {
-                    // User clicked "Cancel", terminate script
-                    return;
-                  }
-            } else {
-                // some other error occurred, handle it accordingly
-                console.error('Error occurred while accessing localStorage:', e);
-            }
-        }
+        var codeMobile = editor.getValue()
+        if (codeMobile != "" && codeMobile != null){
+            saveMyCode(codeMobile)
+        }else{
+            saveMyCode(code);
+        } 
     }
 });
+
+
+
+function saveMyCode() {
+    try {
+        localStorage.setItem(assignmentId, code);
+    } catch (e) {
+        if (e.code === DOMException.QUOTA_EXCEEDED_ERR && localStorage.length === 0) {
+            // localStorage is completely full, notify the user
+            if (window.confirm('Your LocalStorage is full. Do you want to clear cache')) {
+                // User clicked "OK", continue with script
+                localStorage.clear()
+                alert("Local Storage Cleared Successfully")
+            } else {
+                // User clicked "Cancel", terminate script
+                return;
+            }
+        } else {
+            // some other error occurred, handle it accordingly
+            console.error('Error occurred while accessing localStorage:', e);
+        }
+    }
+}
 
 

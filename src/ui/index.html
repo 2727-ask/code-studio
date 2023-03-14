@@ -117,7 +117,6 @@
       </div>
       <div class="col-9 bg-dark">
         <ul class="nav w-100" id="upper-toolbar">
-
           <li class="nav-item dropstart language-selector">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <span id="language">Select language</span>
@@ -161,215 +160,270 @@
 
 
 
-  <div class="editor-mobile">
+  <div class="editor-mobile bg-dark h-100">
     <ul class="nav nav-tabs" id="myTab" role="tablist">
       <li class="nav-item" role="presentation">
-        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
+        <button class="nav-link active" id="mobile-ps-tab" data-bs-toggle="tab" data-bs-target="#mobile-ps"
+          type="button" role="tab" aria-controls="mobile-ps" aria-selected="true">Problem</button>
       </li>
       <li class="nav-item" role="presentation">
-        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Profile</button>
+        <button class="nav-link" id="mobile-editor-tab" data-bs-toggle="tab" data-bs-target="#mobile-editor"
+          type="button" role="tab" aria-controls="mobile-editor" aria-selected="false">Editor</button>
       </li>
       <li class="nav-item" role="presentation">
-        <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Contact</button>
+        <button class="nav-link" id="mobile-console-tab" data-bs-toggle="tab" data-bs-target="#mobile-console"
+          type="button" role="tab" aria-controls="mobile-console" aria-selected="false">Console</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="mobile-settings-tab" data-bs-toggle="tab" data-bs-target="#mobile-settings"
+          type="button" role="tab" aria-controls="mobile-settings" aria-selected="false">Settings</button>
       </li>
     </ul>
     <div class="tab-content" id="myTabContent">
-      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">...</div>
-      <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
-      <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
-    </div>
-    
-  </div>
+      <div class="tab-pane fade show active container h-100" id="mobile-ps" role="tabpanel"
+        aria-labelledby="mobile-ps-tab">
+        <div class="container my-2 h-100" id="myps" style="color:  #8b949e !important; height:100%"></div>
+      </div>
+      <div class="tab-pane fade" id="mobile-editor" role="tabpanel" aria-labelledby="mobile-editor-tab">
+        <ul class="nav w-100" id="upper-toolbar">
+          <li class="nav-item dropstart language-selector">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <span id="language">Select language</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><button class="dropdown-item" onclick="selectLanguage(0)"><img class="technology-icn"
+                    src="https://img.icons8.com/color/48/null/java-coffee-cup-logo--v1.png" />Java</button></li>
+              <li><button class="dropdown-item" onclick="selectLanguage(1)"><img class="technology-icn"
+                    src="https://img.icons8.com/color/48/null/python--v1.png" /> Python</button>
+              </li>
+              <li><button class="dropdown-item" onclick="selectLanguage(2)"><img class="technology-icn"
+                    src="https://img.icons8.com/fluency/48/null/node-js.png" /> Node</button></li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="#" role="button" onclick="beautifyCode()" aria-expanded="false">
+              <span id="beautify">beautify</span>
+            </a>
+          </li>
 
 
+        </ul>
+        <div class="container my-2" id="myEditor" style="height:100vh"></div>
 
+      </div>
+      <div class="tab-pane fade" id="mobile-console" role="tabpanel" aria-labelledby="mobile-console-tab">...</div>
+      <div class="tab-pane fade" id="mobile-settings" role="tabpanel" aria-labelledby="mobile-settings-tab">
+        <div class="container my-2">
+          <h4 class="text-muted">Settings</h4>
+          <hr class="text-muted">
 
-  <!-- Modals -->
-
-  <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
-    tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalToggleLabel">Editor Shortcuts:</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <div class="card setting-card">
+            <div class="card-body">
+              <h5 class="card-title">Configure Editor</h5>
+              <h6 class="card-subtitle mb-2 text-muted">Manage sizes, colors</h6>
+              <label for="fontsizerangeMobile" class="form-label">font size &nbsp;<span id="fontSizeValueMobile"
+                  class=""></span></label>
+              <input type="range" class="form-range" min="10" max="50" id="fontsizerangeMobile"
+                oninput="changeFontSize(this)">
+            </div>
+          </div>
         </div>
-        <div class="modal-body">
-          <table>
-            <tr>
-              <th>Shortcut Name</th>
-              <th>Keyboard Shortcut</th>
-            </tr>
-            <tr>
-              <td>showSettingsMenu: &nbsp</td>
-              <td><kbd>Ctrl-,</kbd></td>
-            </tr>
-            <tr>
-              <td>goToNextError: &nbsp</td>
-              <td><kbd>Alt-E</kbd></td>
-            </tr>
-            <tr>
-              <td>goToPreviousError: &nbsp</td>
-              <td><kbd>Alt-Shift-E</kbd></td>
-            </tr>
-            <tr>
-              <td>selectall: &nbsp</td>
-              <td><kbd>Ctrl-A</kbd></td>
-            </tr>
-            <tr>
-              <td>gotoline: &nbsp</td>
-              <td><kbd>Ctrl-L</kbd></td>
-            </tr>
-            <tr>
-              <td>fold: &nbsp</td>
-              <td><kbd>Alt-L</kbd> or <kbd>Ctrl-F1</kbd></td>
-            </tr>
-            <tr>
-              <td>unfold: &nbsp</td>
-              <td><kbd>Alt-Shift-L</kbd> or <kbd>Ctrl-Shift-F1</kbd></td>
-            </tr>
-            <tr>
-              <td>toggleFoldWidget: &nbsp</td>
-              <td><kbd>F2</kbd></td>
-            </tr>
-            <tr>
-              <td>toggleParentFoldWidget: &nbsp</td>
-              <td><kbd>Alt-F2</kbd></td>
-            </tr>
-            <tr>
-              <td>foldOther: &nbsp</td>
-              <td><kbd>Alt-0</kbd></td>
-            </tr>
-            <tr>
-              <td>unfoldall: &nbsp</td>
-              <td><kbd>Alt-Shift-0</kbd></td>
-            </tr>
-            <tr>
-              <td>findnext: &nbsp</td>
-              <td><kbd>Ctrl-K</kbd></td>
-            </tr>
-            <tr>
-              <td>findprevious: &nbsp</td>
-              <td><kbd>Ctrl-Shift-K</kbd></td>
-            </tr>
-            <tr>
-              <td>selectOrFindNext: &nbsp</td>
-              <td><kbd>Alt-K</kbd></td>
-            </tr>
-            <tr>
-              <td>selectOrFindPrevious: &nbsp</td>
-              <td><kbd>Alt-Shift-K</kbd></td>
-            </tr>
-            <tr>
-              <td>find: &nbsp</td>
-              <td><kbd>Ctrl-F</kbd></td>
-            </tr>
-            <tr>
-              <td>overwrite: &nbsp</td>
-              <td><kbd>Insert</kbd></td>
-            </tr>
-            <tr>
-              <td>selecttostart: &nbsp</td>
-              <td><kbd>Ctrl-Shift-Home</kbd></td>
-            </tr>
-            <tr>
-              <td>gotostart: &nbsp</td>
-              <td><kbd>Ctrl-Home</kbd></td>
-            </tr>
-            <tr>
-              <td>selectup: &nbsp</td>
-              <td><kbd>Shift-Up</kbd></td>
-            </tr>
-            <tr>
-              <td>golineup: &nbsp</td>
-              <td><kbd>Up</kbd></td>
-            </tr>
-            <tr>
-              <td>selecttoend: &nbsp</td>
-              <td><kbd>Ctrl-Shift-End</kbd></td>
-            </tr>
-            <tr>
-              <td>expandToMatching</td>
-              <td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>M</kbd></td>
-            </tr>
-            <tr>
-              <td>removeline</td>
-              <td><kbd>Ctrl</kbd>+<kbd>D</kbd></td>
-            </tr>
-            <tr>
-              <td>duplicateSelection</td>
-              <td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>D</kbd></td>
-            </tr>
-            <tr>
-              <td>sortlines</td>
-              <td><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>S</kbd></td>
-            </tr>
-            <tr>
-              <td>togglecomment</td>
-              <td><kbd>Ctrl</kbd>+<kbd>/</kbd></td>
-            </tr>
-            <tr>
-              <td>toggleBlockComment</td>
-              <td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>/</kbd></td>
-            </tr>
-            <tr>
-              <td>modifyNumberUp</td>
-              <td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Up</kbd></td>
-            </tr>
-            <tr>
-              <td>modifyNumberDown</td>
-              <td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Down</kbd></td>
-            </tr>
-            <tr>
-              <td>replace</td>
-              <td><kbd>Ctrl</kbd>+<kbd>H</kbd></td>
-            </tr>
-            <tr>
-              <td>undo</td>
-              <td><kbd>Ctrl</kbd>+<kbd>Z</kbd></td>
-            </tr>
-            <tr>
-              <td>redo</td>
-              <td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd> or <kbd>Ctrl</kbd>+<kbd>Y</kbd></td>
-            </tr>
-            <tr>
-              <td>copylinesup</td>
-              <td><kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>Up</kbd></td>
-            </tr>
-            <tr>
-              <td>movelinesup</td>
-              <td><kbd>Alt</kbd>+<kbd>Up</kbd></td>
-            </tr>
-            <tr>
-              <td>copylinesdown</td>
-              <td><kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>Down</kbd></td>
-            </tr>
-            <tr>
-              <td>movelinesdown</td>
-              <td><kbd>Alt</kbd>+<kbd>Down</kbd></td>
-            </tr>
-            <tr>
-          </table>
+      </div>
+
+    </div>
+
+    </div>
+
+
+
+
+    <!-- Modals -->
+
+    <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+      tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalToggleLabel">Editor Shortcuts:</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <table>
+              <tr>
+                <th>Shortcut Name</th>
+                <th>Keyboard Shortcut</th>
+              </tr>
+              <tr>
+                <td>showSettingsMenu: &nbsp</td>
+                <td><kbd>Ctrl-,</kbd></td>
+              </tr>
+              <tr>
+                <td>goToNextError: &nbsp</td>
+                <td><kbd>Alt-E</kbd></td>
+              </tr>
+              <tr>
+                <td>goToPreviousError: &nbsp</td>
+                <td><kbd>Alt-Shift-E</kbd></td>
+              </tr>
+              <tr>
+                <td>selectall: &nbsp</td>
+                <td><kbd>Ctrl-A</kbd></td>
+              </tr>
+              <tr>
+                <td>gotoline: &nbsp</td>
+                <td><kbd>Ctrl-L</kbd></td>
+              </tr>
+              <tr>
+                <td>fold: &nbsp</td>
+                <td><kbd>Alt-L</kbd> or <kbd>Ctrl-F1</kbd></td>
+              </tr>
+              <tr>
+                <td>unfold: &nbsp</td>
+                <td><kbd>Alt-Shift-L</kbd> or <kbd>Ctrl-Shift-F1</kbd></td>
+              </tr>
+              <tr>
+                <td>toggleFoldWidget: &nbsp</td>
+                <td><kbd>F2</kbd></td>
+              </tr>
+              <tr>
+                <td>toggleParentFoldWidget: &nbsp</td>
+                <td><kbd>Alt-F2</kbd></td>
+              </tr>
+              <tr>
+                <td>foldOther: &nbsp</td>
+                <td><kbd>Alt-0</kbd></td>
+              </tr>
+              <tr>
+                <td>unfoldall: &nbsp</td>
+                <td><kbd>Alt-Shift-0</kbd></td>
+              </tr>
+              <tr>
+                <td>findnext: &nbsp</td>
+                <td><kbd>Ctrl-K</kbd></td>
+              </tr>
+              <tr>
+                <td>findprevious: &nbsp</td>
+                <td><kbd>Ctrl-Shift-K</kbd></td>
+              </tr>
+              <tr>
+                <td>selectOrFindNext: &nbsp</td>
+                <td><kbd>Alt-K</kbd></td>
+              </tr>
+              <tr>
+                <td>selectOrFindPrevious: &nbsp</td>
+                <td><kbd>Alt-Shift-K</kbd></td>
+              </tr>
+              <tr>
+                <td>find: &nbsp</td>
+                <td><kbd>Ctrl-F</kbd></td>
+              </tr>
+              <tr>
+                <td>overwrite: &nbsp</td>
+                <td><kbd>Insert</kbd></td>
+              </tr>
+              <tr>
+                <td>selecttostart: &nbsp</td>
+                <td><kbd>Ctrl-Shift-Home</kbd></td>
+              </tr>
+              <tr>
+                <td>gotostart: &nbsp</td>
+                <td><kbd>Ctrl-Home</kbd></td>
+              </tr>
+              <tr>
+                <td>selectup: &nbsp</td>
+                <td><kbd>Shift-Up</kbd></td>
+              </tr>
+              <tr>
+                <td>golineup: &nbsp</td>
+                <td><kbd>Up</kbd></td>
+              </tr>
+              <tr>
+                <td>selecttoend: &nbsp</td>
+                <td><kbd>Ctrl-Shift-End</kbd></td>
+              </tr>
+              <tr>
+                <td>expandToMatching</td>
+                <td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>M</kbd></td>
+              </tr>
+              <tr>
+                <td>removeline</td>
+                <td><kbd>Ctrl</kbd>+<kbd>D</kbd></td>
+              </tr>
+              <tr>
+                <td>duplicateSelection</td>
+                <td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>D</kbd></td>
+              </tr>
+              <tr>
+                <td>sortlines</td>
+                <td><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>S</kbd></td>
+              </tr>
+              <tr>
+                <td>togglecomment</td>
+                <td><kbd>Ctrl</kbd>+<kbd>/</kbd></td>
+              </tr>
+              <tr>
+                <td>toggleBlockComment</td>
+                <td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>/</kbd></td>
+              </tr>
+              <tr>
+                <td>modifyNumberUp</td>
+                <td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Up</kbd></td>
+              </tr>
+              <tr>
+                <td>modifyNumberDown</td>
+                <td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Down</kbd></td>
+              </tr>
+              <tr>
+                <td>replace</td>
+                <td><kbd>Ctrl</kbd>+<kbd>H</kbd></td>
+              </tr>
+              <tr>
+                <td>undo</td>
+                <td><kbd>Ctrl</kbd>+<kbd>Z</kbd></td>
+              </tr>
+              <tr>
+                <td>redo</td>
+                <td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd> or <kbd>Ctrl</kbd>+<kbd>Y</kbd></td>
+              </tr>
+              <tr>
+                <td>copylinesup</td>
+                <td><kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>Up</kbd></td>
+              </tr>
+              <tr>
+                <td>movelinesup</td>
+                <td><kbd>Alt</kbd>+<kbd>Up</kbd></td>
+              </tr>
+              <tr>
+                <td>copylinesdown</td>
+                <td><kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>Down</kbd></td>
+              </tr>
+              <tr>
+                <td>movelinesdown</td>
+                <td><kbd>Alt</kbd>+<kbd>Down</kbd></td>
+              </tr>
+              <tr>
+            </table>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
 
 
 
-  <footer class="editor-pc-footer bg-dark text-light fixed-bottom d-flex align-items-center" style="min-height: 6vh;">
-    <div class="d-flex justify-content-end bg-dark w-100">
-      <button class="btn btn-dark btn-sm" onclick="clearTerminal()">Clear</button>
-      <span style="width: 5px;"></span>
-      <button class="btn btn-secondary btn-sm" onclick="toggleTerminalVisibility()">Console</button>
-      <span style="width: 5px;"></span>
-      <button class="btn btn-primary btn-sm" onclick="runCode()">Run</button>
-      <span style="width: 5px;"></span>
-      <button class="btn btn-sm btn-success">Submit</button>
-      <span style="width: 5px;"></span>
-    </div>
-  </footer>
+    <footer class="editor-pc-footer bg-dark text-light fixed-bottom d-flex align-items-center" style="min-height: 6vh;">
+      <div class="d-flex justify-content-end bg-dark w-100">
+        <button class="btn btn-dark btn-sm" onclick="clearTerminal()">Clear</button>
+        <span style="width: 5px;"></span>
+        <button class="btn btn-secondary btn-sm" onclick="toggleTerminalVisibility()">Console</button>
+        <span style="width: 5px;"></span>
+        <button class="btn btn-primary btn-sm" onclick="runCode()">Run</button>
+        <span style="width: 5px;"></span>
+        <button class="btn btn-sm btn-success">Submit</button>
+        <span style="width: 5px;"></span>
+      </div>
+    </footer>
 </body>
 <!-- <script src="/js/ace-builds-master/src-noconflict/ace.js" type="application/javascript" charset=utf-8></script> -->
 
