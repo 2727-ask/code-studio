@@ -88,7 +88,7 @@ const path = require('path');
 
 
 const dependancy = require('./inject/dependancy');
-const { runPython, runJava } = require("./runner/runner");
+const { runPython, runJava, runShell } = require("./runner/runner");
 dependancy(app);
 
 
@@ -137,16 +137,19 @@ io.on("connection", (socket) => {
     socket.on("code", (data) => {
         ptyProcess.write("clear")
         ptyProcess.write("\n");
-        
+        console.log(data.type);
         //Run Python
-        if(data.type == "python"){
-            runPython(data.code, ptyProcess);
-        }else if(data.type == "java"){
-            runJava(data.code, ptyProcess);
-        }else if(data.type=="javascript"){
-            runNode(data.code, ptyProcess);
+        if (data.type == "python") {
+            runPython(data.code, ptyProcess, data.userId);
+        } else if (data.type === "java") {
+            runJava(data.code, ptyProcess, data.userId);
+        } else if (data.type === "javascript") {
+            runNode(data.code, ptyProcess, data.userId);
+        } else if (data.type === "sh") {
+            console.log("Shell Script");
+            runShell(data.code, ptyProcess, data.userId);
         }
-        
+
     })
 });
 

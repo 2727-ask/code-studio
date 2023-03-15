@@ -118,3 +118,8 @@ this.socket=io("http://localhost:9999",{ transports:['websocket']
 
 
 https://stackoverflow.com/questions/73096997/scale-node-js-docker-haproy-socket-io-vue
+
+
+
+
+docker-compose up --build  

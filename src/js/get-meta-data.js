@@ -21,6 +21,7 @@ if (token == undefined || token == null) {
     const { header, payload } = decodeJwt(token)
     userInfo = payload;
     if (userInfo != null) {
+        localStorage.setItem("userId", userInfo.id)
         profilePic.style.display = 'block';
     } else {
         profilePic.style.display = "none";
@@ -69,7 +70,7 @@ if (assignmentId && token) {
             }
         };
         xhr.send();
-    }else{
+    } else {
         alert("Session Expired! Please login again")
     }
 } 

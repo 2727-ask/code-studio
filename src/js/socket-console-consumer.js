@@ -47,7 +47,7 @@ term.open(documentTerminal);
  
 
 // const localEcho = new LocalEchoController(term);
-// term2.open(documentTerminalMobile);
+term2.open(documentTerminalMobile);
 
 //-------------------Write Data To Terminal-------------------------------//
 

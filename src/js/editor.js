@@ -1,13 +1,15 @@
 const languageMap = {
     0: "java",
     1: "python",
-    2: "javascript"
+    2: "javascript",
+    3: "sh"
 }
 
 const technologyIcnMap = {
     0: 'Java',
     1: 'Python',
-    2: 'Node.js'
+    2: 'Node.js',
+    3: 'Shell'
 }
 
 const themeMap = {
@@ -83,12 +85,16 @@ function selectLanguage(params) {
     editorMobile.session.setMode(`ace/mode/${languageMap[params]}`);
     // editorMobile.session.setMode(`ace/mode/${languageMap[params]}`);
     currentLanguage = languageMap[params];
+    console.log(currentLanguage);
 }
 
 
 function runCode() {
+    console.log(currentLanguage);
+    let userId = localStorage.getItem("userId");
     var code = editor.getValue();
     socket.emit("code", {
+        userId: userId,
         type: currentLanguage,
         code: code
     })
@@ -222,7 +228,7 @@ editor.getSession().on("change", function () {
 
 
 
-function saveMyCode() {
+function saveMyCode(code) {
     try {
         localStorage.setItem(assignmentId, code);
     } catch (e) {
