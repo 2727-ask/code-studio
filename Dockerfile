@@ -10,11 +10,12 @@ RUN mkdir /codes
 RUN pwd
 RUN ls -lart
 RUN useradd -ms /bin/bash wolverine
+USER wolverine
 
 # Grant permissions to wolverine user
-RUN mkdir /etc/sudoers.d && \
-    echo "wolverine ALL=(ALL) NOPASSWD: /usr/sbin/service mysql start, /usr/sbin/service mysql stop" >> /etc/sudoers.d/wolverine && \
-    chmod 0440 /etc/sudoers.d/wolverine
+# RUN mkdir /etc/sudoers.d && \
+#     echo "wolverine ALL=(ALL) NOPASSWD: /usr/sbin/service mysql start, /usr/sbin/service mysql stop" >> /etc/sudoers.d/wolverine && \
+#     chmod 0440 /etc/sudoers.d/wolverine
 
 # USER wolverine
 # RUN chown wolverine:wolverine /run/mysqld/mysqld.pid
