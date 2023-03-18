@@ -125,3 +125,53 @@ body {
     background: #eee8d5; color:  #93a1a1; border: 1px solid  #93a1a1;
 }
 
+
+
+
+/* Loader */
+.loader-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: none;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .loader {
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #b1db34;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+
+
+  .mytoast {
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    background-color: #333;
+    color: #0ecc0b;
+    padding: 16px;
+    visibility: hidden;
+    z-index: 1;
+    transition: visibility 0s linear 300ms;
+  }
+  
+

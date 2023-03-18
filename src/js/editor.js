@@ -85,6 +85,7 @@ function selectLanguage(params) {
     editorMobile.session.setMode(`ace/mode/${languageMap[params]}`);
     // editorMobile.session.setMode(`ace/mode/${languageMap[params]}`);
     currentLanguage = languageMap[params];
+    localStorage.setItem("currentLanguage",languageMap[params])
     console.log(currentLanguage);
 }
 

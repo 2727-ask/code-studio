@@ -1,6 +1,7 @@
 const urlParams = new URLSearchParams(window.location.search);
 const assignmentId = urlParams.get('assignmentId');
 const token = urlParams.get('token');
+const backend = "http://localhost:3000"
 
 
 function decodeJwt(token) {
@@ -39,6 +40,7 @@ function setUserInfo() {
 if (assignmentId == undefined) {
     document.getElementById("nav-home-tab").style.display = "none";
     document.getElementById("nav-home").style.display = "none";
+    document.getElementById("submit_button").style.display = "none";
 }
 
 
@@ -56,7 +58,7 @@ function isTokenExpired(token) {
 if (assignmentId && token) {
     const xhr = new XMLHttpRequest();
     if (!isTokenExpired(token)) {
-        const url = `http://localhost:3000/api/student/solveassignment/?assignmentId=${assignmentId}`;
+        const url = `${backend}/api/student/solveassignment/?assignmentId=${assignmentId}`;
         xhr.open('GET', url);
         xhr.setRequestHeader('authentication', `bearer ${token}`);
         xhr.onload = () => {
@@ -73,4 +75,61 @@ if (assignmentId && token) {
     } else {
         alert("Session Expired! Please login again")
     }
-} 
+}
+
+
+function showToast(type, message) {
+    const toast = document.querySelector('.mytoast');
+    toast.innerText = message;
+    if (type == "error") {
+        toast.style.color = "#FF3131";
+        toast.style.borderLeft = "1px solid #FF3131";
+    }else{
+        toast.style.color = "#0ecc0b";
+        toast.style.borderLeft = "1px solid #0ecc0b";
+    }
+    toast.style.visibility = 'visible';
+    setTimeout(function () {
+        toast.style.visibility = 'hidden';
+    }, 3000);
+}
+
+
+
+function submitAssignment() {
+    const jwtToken = token;
+    const myassignmentId = assignmentId;
+    const code = localStorage.getItem(assignmentId);
+    const currentLanguage = localStorage.getItem("currentLanguage");
+
+    if (!isTokenExpired(jwtToken)) {
+        const loaderOverlay = document.querySelector(".loader-overlay");
+        loaderOverlay.style.display = "flex"; // show the loader overlay
+
+        const xhr = new XMLHttpRequest();
+        const url = `${backend}/api/student/submit`;
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.setRequestHeader("authentication", "bearer "+jwtToken);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                loaderOverlay.style.display = "none"; // hide the loader overlay
+                if (xhr.status === 200) {
+                    showToast("success", "Assignment Submitted Successfully");
+                    console.log("Assignment Submitted Successfully");
+                } else if (xhr.status === 404) {
+                    showToast("error", "404 API NOT FOUND");
+                    console.log("Error:", xhr.statusText);
+                } else if(xhr.status === 500){
+                    showToast("error", "Oh Crap! Internal Server Error");
+                }else{
+                    showToast("error", "An Unexpected Error Occured"); 
+                }
+            } else {
+                showToast("error", xhr.responseText ?? "An Unexpected Error Occured"); 
+            }
+        };
+        const data = JSON.stringify({ assignmentId: myassignmentId, code: code , language: currentLanguage});
+        xhr.send(data);
+    }
+}

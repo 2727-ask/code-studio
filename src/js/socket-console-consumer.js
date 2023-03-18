@@ -176,7 +176,7 @@ function terminalSizeAdjust(width) {
 
     } else {
         initFontSize = 14;
-        intCols = 80;
+        intCols = 100;
         intRows = 12;
     }
 

@@ -112,13 +112,7 @@
 
 
 
-                <div class="w-100">
-                  <h5>
-                    Batch Executer
-                  </h5>
-                  <textarea class="w-100" name="" id="batchcmds"></textarea><br>
-                  <button class="btn btn-warning">Execute</button>
-                </div>
+
               </div>
             </div>
           </div>
@@ -140,7 +134,8 @@
                     src="https://img.icons8.com/fluency/48/null/node-js.png" /> Node</button></li>
 
               <li><button class="dropdown-item" onclick="selectLanguage(3)"><img class="technology-icn"
-                    src="https://img.icons8.com/external-solidglyph-m-oki-orlando/32/null/external-batch-file-programming-solid-solidglyph-m-oki-orlando.png" /> Shell</button></li>
+                    src="https://img.icons8.com/external-solidglyph-m-oki-orlando/32/null/external-batch-file-programming-solid-solidglyph-m-oki-orlando.png" />
+                  Shell</button></li>
             </ul>
           </li>
 
@@ -423,6 +418,16 @@
     </div>
   </div>
 
+  <div class="loader-overlay">
+    <div class="loader"></div>
+  </div>
+
+  <div class="mytoast"></div>
+
+ 
+
+
+  
 
 
 
@@ -434,13 +439,16 @@
       <span style="width: 5px;"></span>
       <button class="btn btn-primary btn-sm" onclick="runCode()">Run</button>
       <span style="width: 5px;"></span>
-      <button class="btn btn-sm btn-success">Submit</button>
+      <button class="btn btn-sm btn-success" id="submit_button" onclick="submitAssignment()">Submit</button>
       <span style="width: 5px;"></span>
     </div>
   </footer>
 </body>
 <!-- <script src="/js/ace-builds-master/src-noconflict/ace.js" type="application/javascript" charset=utf-8></script> -->
 
+
+<script src="/bootstrap/js/bootstrap.min.js"></script>
+<script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="/js/get-meta-data.js" type="application/javascript"></script>
 <script src="/ace/ace.js" type="application/javascript"></script>
 <script src="/ace/ext-language_tools.js" type="application/javascript"></script>
@@ -457,8 +465,7 @@
 
 <!-- <script src="/js/ace-builds-master/src-noconflict/ext-beautify.js"></script>
 <script src="/js/ace-builds-master/src-noconflict/ext-language_tools.js" type="application/javascript" charset=utf-8></script> -->
-<script src="/bootstrap/js/bootstrap.min.js"></script>
-<script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+
 
 
 </html>
