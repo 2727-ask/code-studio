@@ -1,3 +1,5 @@
+const extcode = urlParams.get('extcode')
+
 const languageMap = {
     0: "java",
     1: "python",
@@ -56,6 +58,14 @@ editorMobile.setOptions({
     formatOnType: true,
 })
 
+
+if(extcode!=undefined && extcode!=null){
+    editor.setValue(extcode);
+    editorMobile.setValue(extcode);
+}else{
+    getPreviouslyDoneCode();
+}
+
 function getPreviouslyDoneCode() {
     const urlParams = new URLSearchParams(window.location.search);
     const assignmentId = urlParams.get('assignmentId');
@@ -70,7 +80,11 @@ function getPreviouslyDoneCode() {
     }
 }
 
-getPreviouslyDoneCode();
+
+
+
+
+
 
 
 
