@@ -1,7 +1,7 @@
 const urlParams = new URLSearchParams(window.location.search);
 const assignmentId = urlParams.get('assignmentId');
 const token = urlParams.get('token');
-const backend = "https://laas.onrender.com"
+const backend = "https://laas-prod.onrender.com/"
 
 
 function decodeJwt(token) {
