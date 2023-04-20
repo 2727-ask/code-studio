@@ -7,8 +7,8 @@ RUN apt-get update
 RUN apt-get update \
      && apt-get install default-jre -y \
      && apt-get install default-jdk -y
-RUN apt-get install mariadb-server -y
-RUN service mysql start
+# RUN apt-get install mariadb-server -y
+# RUN service mysql start
 RUN mkdir /codes
 RUN pwd
 RUN ls -lart
