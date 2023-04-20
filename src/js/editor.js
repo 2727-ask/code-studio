@@ -187,14 +187,10 @@ function removeClassAndAddTheme(themeId) {
 
 
 function beautifyCode() {
+    console.log("beautify triggered");
     const beautify = js_beautify(editor.getValue());
-    const editorMobileCode = js_beautify(editorMobile.getValue());
-    if(editorMobileCode!=null && editorMobileCode!=undefined && editorMobileCode!=""){
-        editorMobile.setValue(beautify);
-    }else{
-        editor.setValue(beautify);
-    }
-   
+    console.log(beautify);
+    editor.setValue(beautify);  
 }
 
 

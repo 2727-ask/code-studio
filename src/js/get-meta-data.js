@@ -57,6 +57,7 @@ function isTokenExpired(token) {
 
 
 if (assignmentId && token) {
+    console.log("Fetching Data From Servers");
     const xhr = new XMLHttpRequest();
     if (!isTokenExpired(token)) {
         const url = `${backend}/api/student/solveassignment/?assignmentId=${assignmentId}`;
