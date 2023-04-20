@@ -4,8 +4,8 @@ const token = urlParams.get('token');
 const role = urlParams.get('role');
 
 const submissionId = urlParams.get('submissionId');
-// const backend = "https://laas-prod.onrender.com"
-const backend = "http://localhost:9696"
+const backend = "https://laas-prod.onrender.com"
+// const backend = "http://localhost:9696"
 
 
 function decodeJwt(token) {
