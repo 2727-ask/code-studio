@@ -2,6 +2,7 @@ const urlParams = new URLSearchParams(window.location.search);
 const assignmentId = urlParams.get('assignmentId');
 const token = urlParams.get('token');
 const backend = "https://laas-prod.onrender.com"
+// const backend = "http://localhost:9696"
 
 
 function decodeJwt(token) {
