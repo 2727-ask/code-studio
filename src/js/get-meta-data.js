@@ -1,8 +1,11 @@
 const urlParams = new URLSearchParams(window.location.search);
 const assignmentId = urlParams.get('assignmentId');
 const token = urlParams.get('token');
-const backend = "https://laas-prod.onrender.com"
-// const backend = "http://localhost:9696"
+const role = urlParams.get('role');
+
+const submissionId = urlParams.get('submissionId');
+// const backend = "https://laas-prod.onrender.com"
+const backend = "http://localhost:9696"
 
 
 function decodeJwt(token) {
@@ -58,22 +61,48 @@ function isTokenExpired(token) {
 
 if (assignmentId && token) {
     console.log("Fetching Data From Servers");
-    const xhr = new XMLHttpRequest();
+    let response1;
+    let response2;
+
     if (!isTokenExpired(token)) {
-        const url = `${backend}/api/student/solveassignment/?assignmentId=${assignmentId}`;
-        xhr.open('GET', url);
-        xhr.setRequestHeader('authentication', `bearer ${token}`);
-        xhr.onload = () => {
-            if (xhr.status) {
-                const response = JSON.parse(xhr.responseText);
-                console.log(response);
+        const url1 = `${backend}/api/student/solveassignment/?assignmentId=${assignmentId}`;
+        let url2;
+
+        if (role === 'instructor') {
+            url2 =`${backend}/api/instructor/submit/?assignmentId=${assignmentId}&submissionId=${submissionId}`;
+        }
+
+        if (role === 'student') { 
+            url2 =`${backend}/api/student/submit/?assignmentId=${assignmentId}&submissionId=${submissionId}`;
+        }
+        
+        Promise.all([fetch(url1), fetch(url2, {
+            headers: {
+                'authentication': `bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        })])
+            .then(responses => Promise.all(responses.map(res => res.json())))
+            .then(data => {
+                // Do something with the response data from both requests
+                response1 = data[0];
                 let description = document.getElementById("description");
                 let mobile_ps = document.getElementById("myps");
-                description.innerHTML = response.data.assignmentData.description ?? "<h1>No Description</h1>"
-                mobile_ps.innerHTML = response.data.assignmentData.description ?? "<h1>No Description</h1>"
-            }
-        };
-        xhr.send();
+                description.innerHTML = response1.data.assignmentData.description ?? "<h1>No Description</h1>"
+                mobile_ps.innerHTML = response1.data.assignmentData.description ?? "<h1>No Description</h1>"
+                console.log(data[1]);
+
+
+                response2 = data[1];
+                let assignmentData = response2.data.submission[0].assignmentData;
+                editor.setValue(assignmentData);
+                editor.session.setMode(`ace/mode/${response2.data.submission[0].language}`);
+
+
+        
+
+            })
+            .catch(error => console.error(error));
     } else {
         alert("Session Expired! Please login again")
     }
@@ -86,7 +115,7 @@ function showToast(type, message) {
     if (type == "error") {
         toast.style.color = "#FF3131";
         toast.style.borderLeft = "1px solid #FF3131";
-    }else{
+    } else {
         toast.style.color = "#0ecc0b";
         toast.style.borderLeft = "1px solid #0ecc0b";
     }
@@ -112,7 +141,7 @@ function submitAssignment() {
         const url = `${backend}/api/student/submit`;
         xhr.open("POST", url, true);
         xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.setRequestHeader("authentication", "bearer "+jwtToken);
+        xhr.setRequestHeader("authentication", "bearer " + jwtToken);
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
                 loaderOverlay.style.display = "none"; // hide the loader overlay
@@ -122,16 +151,16 @@ function submitAssignment() {
                 } else if (xhr.status === 404) {
                     showToast("error", "404 API NOT FOUND");
                     console.log("Error:", xhr.statusText);
-                } else if(xhr.status === 500){
+                } else if (xhr.status === 500) {
                     showToast("error", "Oh Crap! Internal Server Error");
-                }else{
-                    showToast("error", "An Unexpected Error Occured"); 
+                } else {
+                    showToast("error", "An Unexpected Error Occured");
                 }
             } else {
-                showToast("error", xhr.responseText ?? "An Unexpected Error Occured"); 
+                showToast("error", xhr.responseText ?? "An Unexpected Error Occured");
             }
         };
-        const data = JSON.stringify({ assignmentId: myassignmentId, code: code , language: currentLanguage});
+        const data = JSON.stringify({ assignmentId: myassignmentId, code: code, language: currentLanguage });
         xhr.send(data);
     }
 }
