@@ -64,18 +64,18 @@ if (assignmentId && token) {
     let response1;
     let response2;
 
-    if (!isTokenExpired(token)) {
+    if (!isTokenExpired(token) && role != null && role !== undefined) {
         const url1 = `${backend}/api/student/solveassignment/?assignmentId=${assignmentId}`;
         let url2;
 
         if (role === 'instructor') {
-            url2 =`${backend}/api/instructor/submit/?assignmentId=${assignmentId}&submissionId=${submissionId}`;
+            url2 = `${backend}/api/instructor/submit/?assignmentId=${assignmentId}&submissionId=${submissionId}`;
         }
 
-        if (role === 'student') { 
-            url2 =`${backend}/api/student/submit/?assignmentId=${assignmentId}&submissionId=${submissionId}`;
+        if (role === 'student') {
+            url2 = `${backend}/api/student/submit/?assignmentId=${assignmentId}&submissionId=${submissionId}`;
         }
-        
+
         Promise.all([fetch(url1), fetch(url2, {
             headers: {
                 'authentication': `bearer ${token}`,
@@ -99,12 +99,35 @@ if (assignmentId && token) {
                 editor.session.setMode(`ace/mode/${response2.data.submission[0].language}`);
 
 
-        
+
 
             })
             .catch(error => console.error(error));
     } else {
         alert("Session Expired! Please login again")
+    }
+
+
+    if (!isTokenExpired(token)) {
+        const assignmenturl = `${backend}/api/student/solveassignment/?assignmentId=${assignmentId}`;
+        console.log("Get Assignment Submisssion");
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', assignmenturl);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    console.log("Assigniment Data");
+                    console.log(JSON.parse(xhr.responseText).data.assignmentData);
+                    description.innerHTML = JSON.parse(xhr.responseText).data.assignmentData.description ?? "<h1>No Description</h1>"
+                    mobile_ps.innerHTML = JSON.parse(xhr.responseText).data.assignmentData.description ?? "<h1>No Description</h1>"
+                } else {
+                    console.log('Error: ' + xhr.status);
+                }
+            }
+        };
+        xhr.send();
+
+
     }
 }
 
