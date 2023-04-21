@@ -117,6 +117,8 @@ if (assignmentId && token) {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
                     console.log("Assigniment Data");
+                    let description = document.getElementById("description");
+                    let mobile_ps = document.getElementById("myps");
                     console.log(JSON.parse(xhr.responseText).data.assignmentData);
                     description.innerHTML = JSON.parse(xhr.responseText).data.assignmentData.description ?? "<h1>No Description</h1>"
                     mobile_ps.innerHTML = JSON.parse(xhr.responseText).data.assignmentData.description ?? "<h1>No Description</h1>"
